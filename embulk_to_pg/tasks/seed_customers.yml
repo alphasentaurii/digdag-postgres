@@ -19,5 +19,11 @@ in:
     trim_if_not_quoted: false
     allow_extra_columns: false
     allow_optional_columns: false
-out: {type: postgresql, host: localhost, user: digdag, password: digdag, database: test,
-  table: customers_tmp, mode: insert}
+out: 
+  type: postgresql
+  host: localhost
+  user: digdag
+  password: digdag
+  database: test
+  table: customers_tmp
+  mode: insert_direct
