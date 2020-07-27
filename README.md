@@ -14,7 +14,7 @@ Before you begin, ensure you have met the following requirements:
 * You have installed `Java` version 8
 * You have `postgreSQL` installed and configured
 
-For help installing and configuring Java and PostgreSQL, check out my blog post ![Digdag PostgreSQL Tutorial](https://www.hakkeray.com/datascience/2020/07/27/digdag-postgresql-tutorial.html).
+For help installing and configuring Java and PostgreSQL, check out my blog post ![Digdag PostgreSQL Tutorial](https://www.hakkeray.com/datascience/2020/07/26/digdag-postgresql-tutorial.html).
 
 ## Running the Digdag Postgres project
 
@@ -61,20 +61,15 @@ To run this project locally, follow these steps:
 In the command line/terminal:
 
 ```bash
-$ git clone https://github.com/hakkeray/digdag-postgres
-$ cd digdag-to-postgres/embulk_to_postgres
-$ digdag run embulk_to_postgres.dig --rerun -O log/task
-```
-
-```bash
-$ cd embulk_to_postgres
-$ digdag run embulk_to_mysql.dig -O log/task
+$ git clone https://github.com/hakkeray/digdag-postgres.git
+$ cd digdag-to-postgres/embulk_to_pg
+$ digdag run embulk_to_pg.dig -O log/task
 ```
 
 *Note: If this isn't your first time running the workflow, use the --rerun flag:*
 
 ```bash
-$ digdag run embulk_to_postgres.dig --rerun -O log/task
+$ digdag run embulk_to_pg.dig --rerun -O log/task
 ```
 
 # Contact
