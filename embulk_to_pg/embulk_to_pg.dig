@@ -1,22 +1,3 @@
-timezone: UTC
-
-+setup:
-  echo>: start ${session_time}
-
-+disp_current_date:
-  echo>: ${moment(session_time).utc().format('YYYY-MM-DD HH:mm:ss Z')}
-
-+repeat:
-  for_each>:
-    order: [first, second, third]
-    animal: [dog, cat]
-  _do:
-    echo>: ${order} ${animal}
-  _parallel: true
-
-+teardown:
-  echo>: finish ${session_time}
-
 # embulk_to_pg.dig
 timezone: UTC
 
@@ -25,15 +6,15 @@ _export:
   start_msg:     "digdag ${workflow_name} start"
   end_msg:       "digdag ${workflow_name} finish"
   error_msg:     "digdag ${workflow_name} error"
-  postgresql:
-    host: localhost
-    port: 
+  pg:
+    host: 127.0.0.1
+    port: 5432
     user: digdag
-    password_override: password
-    database: td_coding_challenge
+    #password_override: password
+    database: test
     strict_transaction: false
-    q1: queries/page_count.txt
-    q2: queries/top_users.txt
+  q1: queries/page_count.txt
+  q2: queries/top_users.txt
 
 +start:
   echo>: ${start_msg}
@@ -80,10 +61,12 @@ _export:
   +count_pageviews:
     pg>: queries/count_pageviews.sql > ${q1}
     _preview: true
+    store_last_results: all
   
   +top_3_users:
     pg>: queries/top_3_users.sql > ${q2}
     _preview: true
+    store_last_results: all
 
 # End of Workflow
 +end:
