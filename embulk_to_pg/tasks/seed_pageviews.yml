@@ -19,7 +19,7 @@ in:
     trim_if_not_quoted: false
     allow_extra_columns: false
     allow_optional_columns: false
-out: 
+out:
   type: postgresql
   host: localhost
   user: digdag
