@@ -10,7 +10,7 @@ _export:
     host: 127.0.0.1
     port: 5432
     user: digdag
-    password_override: password
+    password: digdag
     database: test
     strict_transaction: false
   q1: queries/page_count.txt
