@@ -59,12 +59,12 @@ _export:
   _parallel: true
   
   +count_pageviews:
-    pg>: queries/count_pageviews.sql > ${q1}
+    pg>: queries/count_pageviews.sql
     _preview: true
     store_last_results: all
   
   +top_3_users:
-    pg>: queries/top_3_users.sql > ${q2}
+    pg>: queries/top_3_users.sql
     _preview: true
     store_last_results: all
 

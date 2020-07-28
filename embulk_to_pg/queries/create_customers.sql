@@ -1,6 +1,5 @@
 --create_customers.sql--
 CREATE TABLE customers
-    AS (SELECT c.user_id, c.first_name, c.last_name, c.job_title, p.user_agent AS operating_system 
-        FROM pageviews_tmp, customers_tmp c 
-        WHERE p.user_id = c.user_id 
-        GROUP BY user_id);
+    AS (SELECT customers_tmp.user_id, customers_tmp.first_name, customers_tmp.last_name, customers_tmp.job_title, pageviews_tmp.user_agent AS operating_system 
+        FROM customers_tmp, pageviews_tmp 
+        WHERE pageviews_tmp.user_id = customers_tmp.user_id);

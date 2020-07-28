@@ -12,4 +12,4 @@ WHERE operating_system LIKE '%Windows%';
 
 UPDATE customers
 SET operating_system = 'Other'
-WHERE operating_system NOT REGEXP 'Macintosh|Linux|Windows';
+WHERE operating_system !~*'Macintosh|Linux|Windows';
