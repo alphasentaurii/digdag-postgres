@@ -1,0 +1,182 @@
+2020-07-29 23:27:25 +0000 [WARN] (main) io.digdag.cli.Run: Reusing the last session time 2020-07-27T00:00:00+00:00.
+2020-07-29 23:27:25 +0000 [INFO] (main) io.digdag.cli.Run: Using session /root/digdag-postgres/embulk_to_pg/.digdag/status/20200727T000000+0000.
+2020-07-29 23:27:25 +0000 [INFO] (main) io.digdag.core.workflow.WorkflowExecutor: Starting a new session project id=1 workflow name=embulk_to_pg session_time=2020-07-27T00:00:00+00:00
+2020-07-29 23:27:28 +0000 [INFO] (0016@[0:default]+embulk_to_pg+start) io.digdag.core.agent.OperatorManager: echo>: digdag embulk_to_pg start
+digdag embulk_to_pg start
+2020-07-29 23:27:29 +0000 [INFO] (0016@[0:default]+embulk_to_pg+embulk_guess+guess_customers) io.digdag.core.agent.OperatorManager: sh>: embulk guess tasks/seed_customers.yml -o tasks/config_customers.yml
+2020-07-29 23:27:29 +0000 [INFO] (0017@[0:default]+embulk_to_pg+embulk_guess+guess_pageviews) io.digdag.core.agent.OperatorManager: sh>: embulk guess tasks/seed_pageviews.yml -o tasks/config_pageviews.yml
+2020-07-29 23:27:30.248 +0000: Embulk v0.9.23
+2020-07-29 23:27:30.252 +0000: Embulk v0.9.23
+2020-07-29 23:27:35.102 +0000 [WARN] (main): DEPRECATION: JRuby org.jruby.embed.ScriptingContainer is directly injected.
+2020-07-29 23:27:37.284 +0000 [WARN] (main): DEPRECATION: JRuby org.jruby.embed.ScriptingContainer is directly injected.
+2020-07-29 23:28:16.018 +0000 [INFO] (main): Gem's home and path are set by default: "/root/.embulk/lib/gems"
+2020-07-29 23:28:16.216 +0000 [INFO] (main): Gem's home and path are set by default: "/root/.embulk/lib/gems"
+2020-07-29 23:28:18.238 +0000 [INFO] (main): Started Embulk v0.9.23
+2020-07-29 23:28:18.293 +0000 [INFO] (main): Started Embulk v0.9.23
+2020-07-29 23:28:18.519 +0000 [INFO] (0001:guess): Listing local files at directory './data/customers' filtering filename by prefix ''
+2020-07-29 23:28:18.521 +0000 [INFO] (0001:guess): "follow_symlinks" is set false. Note that symbolic links to directories are skipped.
+2020-07-29 23:28:18.523 +0000 [INFO] (0001:guess): Loading files [./data/customers/customers_1.csv, ./data/customers/customers_2.csv]
+2020-07-29 23:28:18.521 +0000 [INFO] (0001:guess): Listing local files at directory './data/pageviews' filtering filename by prefix ''
+2020-07-29 23:28:18.525 +0000 [INFO] (0001:guess): "follow_symlinks" is set false. Note that symbolic links to directories are skipped.
+2020-07-29 23:28:18.528 +0000 [INFO] (0001:guess): Loading files [./data/pageviews/pageviews_2.csv, ./data/pageviews/pageviews_1.csv]
+2020-07-29 23:28:18.541 +0000 [INFO] (0001:guess): Try to read 32,768 bytes from input source
+2020-07-29 23:28:18.547 +0000 [INFO] (0001:guess): Try to read 32,768 bytes from input source
+2020-07-29 23:28:18.755 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+2020-07-29 23:28:18.761 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+2020-07-29 23:28:18.798 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+2020-07-29 23:28:18.803 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+2020-07-29 23:28:18.846 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+2020-07-29 23:28:18.850 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+2020-07-29 23:28:18.875 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+2020-07-29 23:28:18.877 +0000 [INFO] (0001:guess): Loaded plugin embulk (0.9.23)
+in:
+  type: file
+  path_prefix: ./data/customers/
+  parser:
+    charset: UTF-8
+    newline: CRLF
+    type: csv
+    delimiter: ','
+    'quote:': '"'
+    escape: null
+    null_string: 'NULL'
+    skip_header_lines: 1
+    columns:
+    - {name: user_id, type: string}
+    - {name: first_name, type: string}
+    - {name: last_name, type: string}
+    - {name: job_title, type: string}
+    quote: '"'
+    trim_if_not_quoted: false
+    allow_extra_columns: false
+    allow_optional_columns: false
+out: {type: postgresql, host: localhost, user: digdag, password: digdag, database: td_coding_challenge,
+  table: customers_tmp, mode: insert_direct}
+
+Created 'tasks/config_customers.yml' file.
+in:
+  type: file
+  path_prefix: ./data/pageviews/
+  parser:
+    charset: UTF-8
+    newline: CRLF
+    type: csv
+    delimiter: ','
+    'quote:': '"'
+    escape: null
+    null_string: 'NULL'
+    skip_header_lines: 1
+    columns:
+    - {name: user_id, type: string}
+    - {name: url, type: string}
+    - {name: user_agent, type: string}
+    - {name: timestamp, type: long, format: varchar}
+    quote: '"'
+    trim_if_not_quoted: false
+    allow_extra_columns: false
+    allow_optional_columns: false
+out:
+  type: postgresql
+  host: localhost
+  user: digdag
+  password: digdag
+  database: td_coding_challenge
+  table: pageviews_tmp
+  mode: insert_direct
+  column_options:
+    user_id: {value_type: string}
+    url: {value_type: string}
+    user_agent: {value_type: string}
+    timestamp: {value_type: string, format: varchar}
+
+Created 'tasks/config_pageviews.yml' file.
+2020-07-29 23:28:37 +0000 [INFO] (0016@[0:default]+embulk_to_pg+embulk_run+config_pageviews) io.digdag.core.agent.OperatorManager: sh>: embulk run tasks/config_pageviews.yml
+2020-07-29 23:28:37 +0000 [INFO] (0017@[0:default]+embulk_to_pg+embulk_run+config_customers) io.digdag.core.agent.OperatorManager: sh>: embulk run tasks/config_customers.yml
+2020-07-29 23:28:38.814 +0000: Embulk v0.9.232020-07-29 23:28:38.815 +0000: Embulk v0.9.23
+
+2020-07-29 23:28:46.552 +0000 [WARN] (main): DEPRECATION: JRuby org.jruby.embed.ScriptingContainer is directly injected.
+2020-07-29 23:28:46.551 +0000 [WARN] (main): DEPRECATION: JRuby org.jruby.embed.ScriptingContainer is directly injected.
+2020-07-29 23:29:25.582 +0000 [INFO] (main): Gem's home and path are set by default: "/root/.embulk/lib/gems"
+2020-07-29 23:29:30.386 +0000 [INFO] (main): Gem's home and path are set by default: "/root/.embulk/lib/gems"
+2020-07-29 23:29:34.952 +0000 [INFO] (main): Started Embulk v0.9.23
+2020-07-29 23:29:35.400 +0000 [INFO] (main): Started Embulk v0.9.23
+2020-07-29 23:29:36.844 +0000 [INFO] (0001:transaction): Loaded plugin embulk-output-postgresql (0.8.7)
+2020-07-29 23:29:36.845 +0000 [INFO] (0001:transaction): Loaded plugin embulk-output-postgresql (0.8.7)
+2020-07-29 23:29:37.249 +0000 [INFO] (0001:transaction): Listing local files at directory './data/pageviews' filtering filename by prefix ''
+2020-07-29 23:29:37.255 +0000 [INFO] (0001:transaction): "follow_symlinks" is set false. Note that symbolic links to directories are skipped.
+2020-07-29 23:29:37.249 +0000 [INFO] (0001:transaction): Listing local files at directory './data/customers' filtering filename by prefix ''
+2020-07-29 23:29:37.255 +0000 [INFO] (0001:transaction): "follow_symlinks" is set false. Note that symbolic links to directories are skipped.
+2020-07-29 23:29:37.264 +0000 [INFO] (0001:transaction): Loading files [./data/customers/customers_1.csv, ./data/customers/customers_2.csv]
+2020-07-29 23:29:37.264 +0000 [INFO] (0001:transaction): Loading files [./data/pageviews/pageviews_2.csv, ./data/pageviews/pageviews_1.csv]
+2020-07-29 23:29:37.523 +0000 [INFO] (0001:transaction): Using local thread executor with max_threads=2 / tasks=2
+2020-07-29 23:29:37.526 +0000 [INFO] (0001:transaction): Using local thread executor with max_threads=2 / tasks=2
+2020-07-29 23:29:37.724 +0000 [INFO] (0001:transaction): JDBC Driver = /root/.embulk/lib/gems/gems/embulk-output-postgresql-0.8.7/default_jdbc_driver/postgresql-9.4-1205-jdbc41.jar
+2020-07-29 23:29:37.725 +0000 [INFO] (0001:transaction): JDBC Driver = /root/.embulk/lib/gems/gems/embulk-output-postgresql-0.8.7/default_jdbc_driver/postgresql-9.4-1205-jdbc41.jar
+2020-07-29 23:29:37.782 +0000 [INFO] (0001:transaction): Connecting to jdbc:postgresql://localhost:5432/td_coding_challenge options {user=digdag, password=***, tcpKeepAlive=true, loginTimeout=300, socketTimeout=1800}
+2020-07-29 23:29:40.136 +0000 [INFO] (0001:transaction): SQL: SET search_path TO "public"
+2020-07-29 23:29:40.166 +0000 [INFO] (0001:transaction): > 0.01 seconds
+2020-07-29 23:29:40.572 +0000 [INFO] (0001:transaction): TransactionIsolation=read_committed
+2020-07-29 23:29:40.573 +0000 [INFO] (0001:transaction): Using JDBC Driver PostgreSQL 9.4 JDBC4.1 (build 1205)
+2020-07-29 23:29:40.573 +0000 [INFO] (0001:transaction): Using insert_direct mode
+2020-07-29 23:29:41.388 +0000 [INFO] (0001:transaction): SQL: CREATE TABLE IF NOT EXISTS "public"."customers_tmp" ("user_id" TEXT, "first_name" TEXT, "last_name" TEXT, "job_title" TEXT)
+2020-07-29 23:29:41.772 +0000 [INFO] (0001:transaction): > 0.38 seconds
+2020-07-29 23:29:39.650 +0000 [INFO] (0001:transaction): Connecting to jdbc:postgresql://localhost:5432/td_coding_challenge options {user=digdag, password=***, tcpKeepAlive=true, loginTimeout=300, socketTimeout=1800}
+2020-07-29 23:29:41.098 +0000 [INFO] (0001:transaction): SQL: SET search_path TO "public"
+2020-07-29 23:29:41.111 +0000 [INFO] (0001:transaction): > 0.00 seconds
+2020-07-29 23:29:41.123 +0000 [INFO] (0001:transaction): TransactionIsolation=read_committed
+2020-07-29 23:29:41.123 +0000 [INFO] (0001:transaction): Using JDBC Driver PostgreSQL 9.4 JDBC4.1 (build 1205)
+2020-07-29 23:29:41.123 +0000 [INFO] (0001:transaction): Using insert_direct mode
+2020-07-29 23:29:41.351 +0000 [INFO] (0001:transaction): SQL: CREATE TABLE IF NOT EXISTS "public"."pageviews_tmp" ("user_id" TEXT, "url" TEXT, "user_agent" TEXT, "timestamp" BIGINT)
+2020-07-29 23:29:41.773 +0000 [INFO] (0001:transaction): > 0.42 seconds
+2020-07-29 23:29:42.607 +0000 [INFO] (0001:transaction): {done:  0 / 2, running: 0}
+2020-07-29 23:29:42.608 +0000 [INFO] (0001:transaction): {done:  0 / 2, running: 0}
+2020-07-29 23:29:42.737 +0000 [INFO] (0015:task-0001): Connecting to jdbc:postgresql://localhost:5432/td_coding_challenge options {user=digdag, password=***, tcpKeepAlive=true, loginTimeout=300, socketTimeout=1800}
+2020-07-29 23:29:42.740 +0000 [INFO] (0014:task-0000): Connecting to jdbc:postgresql://localhost:5432/td_coding_challenge options {user=digdag, password=***, tcpKeepAlive=true, loginTimeout=300, socketTimeout=1800}
+2020-07-29 23:29:42.773 +0000 [INFO] (0014:task-0000): Connecting to jdbc:postgresql://localhost:5432/td_coding_challenge options {user=digdag, password=***, tcpKeepAlive=true, loginTimeout=300, socketTimeout=1800}
+2020-07-29 23:29:42.774 +0000 [INFO] (0015:task-0001): Connecting to jdbc:postgresql://localhost:5432/td_coding_challenge options {user=digdag, password=***, tcpKeepAlive=true, loginTimeout=300, socketTimeout=1800}
+2020-07-29 23:29:43.045 +0000 [INFO] (0014:task-0000): SQL: SET search_path TO "public"
+2020-07-29 23:29:43.053 +0000 [INFO] (0014:task-0000): > 0.00 seconds
+2020-07-29 23:29:43.053 +0000 [INFO] (0014:task-0000): TransactionIsolation=read_committed
+2020-07-29 23:29:43.054 +0000 [INFO] (0014:task-0000): Copy SQL: COPY "public"."pageviews_tmp" ("user_id", "url", "user_agent", "timestamp") FROM STDIN
+2020-07-29 23:29:43.402 +0000 [INFO] (0014:task-0000): SQL: SET search_path TO "public"
+2020-07-29 23:29:43.405 +0000 [INFO] (0015:task-0001): SQL: SET search_path TO "public"
+2020-07-29 23:29:43.412 +0000 [INFO] (0014:task-0000): > 0.00 seconds
+2020-07-29 23:29:43.413 +0000 [INFO] (0014:task-0000): TransactionIsolation=read_committed
+2020-07-29 23:29:43.418 +0000 [INFO] (0014:task-0000): Copy SQL: COPY "public"."customers_tmp" ("user_id", "first_name", "last_name", "job_title") FROM STDIN
+2020-07-29 23:29:43.422 +0000 [INFO] (0015:task-0001): > 0.02 seconds
+2020-07-29 23:29:43.423 +0000 [INFO] (0015:task-0001): TransactionIsolation=read_committed
+2020-07-29 23:29:43.423 +0000 [INFO] (0015:task-0001): Copy SQL: COPY "public"."pageviews_tmp" ("user_id", "url", "user_agent", "timestamp") FROM STDIN
+2020-07-29 23:29:43.923 +0000 [INFO] (0015:task-0001): SQL: SET search_path TO "public"
+2020-07-29 23:29:43.927 +0000 [INFO] (0015:task-0001): > 0.00 seconds
+2020-07-29 23:29:43.929 +0000 [INFO] (0015:task-0001): TransactionIsolation=read_committed
+2020-07-29 23:29:43.929 +0000 [INFO] (0015:task-0001): Copy SQL: COPY "public"."customers_tmp" ("user_id", "first_name", "last_name", "job_title") FROM STDIN
+2020-07-29 23:29:49.228 +0000 [INFO] (0015:task-0001): Loading 499 rows (101,823 bytes)
+2020-07-29 23:29:49.230 +0000 [INFO] (0014:task-0000): Loading 501 rows (102,851 bytes)
+2020-07-29 23:29:49.399 +0000 [INFO] (0015:task-0001): Loading 50 rows (3,563 bytes)
+2020-07-29 23:29:49.405 +0000 [INFO] (0014:task-0000): Loading 49 rows (3,450 bytes)
+2020-07-29 23:29:49.525 +0000 [INFO] (0015:task-0001): > 0.12 seconds (loaded 50 rows in total)
+2020-07-29 23:29:49.544 +0000 [INFO] (0014:task-0000): > 0.14 seconds (loaded 49 rows in total)
+2020-07-29 23:29:49.555 +0000 [INFO] (0014:task-0000): > 0.31 seconds (loaded 501 rows in total)
+2020-07-29 23:29:49.555 +0000 [INFO] (0015:task-0001): > 0.32 seconds (loaded 499 rows in total)
+2020-07-29 23:29:49.559 +0000 [INFO] (0001:transaction): {done:  1 / 2, running: 1}
+2020-07-29 23:29:49.559 +0000 [INFO] (0001:transaction): {done:  2 / 2, running: 0}
+2020-07-29 23:29:49.562 +0000 [INFO] (0001:transaction): {done:  2 / 2, running: 0}
+2020-07-29 23:29:49.562 +0000 [INFO] (0001:transaction): {done:  2 / 2, running: 0}
+2020-07-29 23:29:49.724 +0000 [INFO] (main): Committed.
+2020-07-29 23:29:49.725 +0000 [INFO] (main): Next config diff: {"in":{"last_path":"./data/customers/customers_2.csv"},"out":{}}
+2020-07-29 23:29:49.743 +0000 [INFO] (main): Committed.
+2020-07-29 23:29:49.744 +0000 [INFO] (main): Next config diff: {"in":{"last_path":"./data/pageviews/pageviews_2.csv"},"out":{}}
+2020-07-29 23:29:54 +0000 [INFO] (0016@[0:default]+embulk_to_pg+create_tables+create_customers) io.digdag.core.agent.OperatorManager: pg>: queries/create_customers.sql
+2020-07-29 23:29:58 +0000 [INFO] (0016@[0:default]+embulk_to_pg+create_tables+create_customers) io.digdag.core.agent.OperatorManager: pg>: queries/create_customers.sql
+2020-07-29 23:30:00 +0000 [INFO] (0016@[0:default]+embulk_to_pg+create_tables+update_customers) io.digdag.core.agent.OperatorManager: pg>: queries/update_customers.sql
+2020-07-29 23:30:02 +0000 [INFO] (0016@[0:default]+embulk_to_pg+create_tables+update_customers) io.digdag.core.agent.OperatorManager: pg>: queries/update_customers.sql
+2020-07-29 23:30:03 +0000 [INFO] (0016@[0:default]+embulk_to_pg+create_tables+create_pageviews) io.digdag.core.agent.OperatorManager: pg>: queries/create_pageviews.sql
+2020-07-29 23:30:05 +0000 [INFO] (0016@[0:default]+embulk_to_pg+create_tables+create_pageviews) io.digdag.core.agent.OperatorManager: pg>: queries/create_pageviews.sql
+2020-07-29 23:30:07 +0000 [INFO] (0016@[0:default]+embulk_to_pg+analysis+count_pageviews) io.digdag.core.agent.OperatorManager: pg>: queries/count_pageviews.sql
+2020-07-29 23:30:08 +0000 [INFO] (0016@[0:default]+embulk_to_pg+analysis+print_q1) io.digdag.core.agent.OperatorManager: echo>: [{"total_views":456}]
+[{"total_views":456}]
+2020-07-29 23:30:10 +0000 [INFO] (0016@[0:default]+embulk_to_pg+analysis+top_3_users) io.digdag.core.agent.OperatorManager: pg>: queries/top_3_users.sql
+2020-07-29 23:30:11 +0000 [INFO] (0016@[0:default]+embulk_to_pg+analysis+print_q2) io.digdag.core.agent.OperatorManager: echo>: [{"user_id":"5d9b8515-823e-49b8-ad44-5c91ef23462f","last_page_viewed":"https://microsoft.com/morbi/porttitor.aspx"},{"user_id":"6cf36c9e-1fa7-491d-a6e1-9c785d68a3d0","last_page_viewed":"http://nps.gov/quis/odio/consequat.json"},{"user_id":"752119fa-50dc-4011-8f13-23aa8d78eb18","last_page_viewed":"http://goo.ne.jp/nunc.html"}]
+[{"user_id":"5d9b8515-823e-49b8-ad44-5c91ef23462f","last_page_viewed":"https://microsoft.com/morbi/porttitor.aspx"},{"user_id":"6cf36c9e-1fa7-491d-a6e1-9c785d68a3d0","last_page_viewed":"http://nps.gov/quis/odio/consequat.json"},{"user_id":"752119fa-50dc-4011-8f13-23aa8d78eb18","last_page_viewed":"http://goo.ne.jp/nunc.html"}]
+2020-07-29 23:30:13 +0000 [INFO] (0016@[0:default]+embulk_to_pg+end) io.digdag.core.agent.OperatorManager: echo>: digdag embulk_to_pg finish
+digdag embulk_to_pg finish
