@@ -63,6 +63,7 @@ In the command line/terminal:
 ```bash
 $ git clone https://github.com/hakkeray/digdag-postgres.git
 $ cd digdag-to-postgres/embulk_to_pg
+$ digdag secrets --local --set pg.password=password
 $ digdag run embulk_to_pg.dig -O log/task
 ```
 

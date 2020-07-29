@@ -24,6 +24,6 @@ out:
   host: localhost
   user: digdag
   password: digdag
-  database: test
+  database: td_coding_challenge
   table: customers_tmp
   mode: insert_direct

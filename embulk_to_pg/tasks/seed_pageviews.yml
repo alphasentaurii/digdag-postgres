@@ -24,7 +24,7 @@ out:
   host: localhost
   user: digdag
   password: digdag
-  database: test
+  database: td_coding_challenge
   table: pageviews_tmp 
   mode: insert_direct
   column_options: 
