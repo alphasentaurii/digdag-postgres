@@ -10,7 +10,7 @@ _export:
     host: 127.0.0.1
     port: 5432
     user: digdag
-    password: digdag
+    password_override: password
     database: test
     strict_transaction: false
   q1: queries/page_count.txt
@@ -44,29 +44,31 @@ _export:
 +create_tables:
   +create_customers:
     pg>: queries/create_customers.sql
-    _preview: true
+    create_table: customers
 
   +update_customers:
     pg>: queries/update_customers.sql
-    _preview: true
 
   +create_pageviews:
     pg>: queries/create_pageviews.sql
-    _preview: true
+    create_table: pageviews
 
 # Data Analysis
 +analysis:
-  _parallel: true
   
   +count_pageviews:
     pg>: queries/count_pageviews.sql
-    _preview: true
     store_last_results: all
   
+  +print_q1:
+    echo>: ${pg.last_results}
+
   +top_3_users:
     pg>: queries/top_3_users.sql
-    _preview: true
     store_last_results: all
+
+  +print_q2:
+    echo>: ${pg.last_results}
 
 # End of Workflow
 +end:
