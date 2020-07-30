@@ -13,8 +13,6 @@ _export:
     password_override: password
     database: td_coding_challenge
     strict_transaction: false
-  q1: queries/page_count.txt
-  q2: queries/top_users.txt
 
 +start:
   echo>: ${start_msg}
