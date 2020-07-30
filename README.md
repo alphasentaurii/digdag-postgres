@@ -61,6 +61,8 @@ To run this project locally, follow these steps:
 In the command line/terminal:
 
 ```bash
+$ sudo -s # root privileges
+$ cd ~/ # change to root directory home folder
 $ git clone https://github.com/hakkeray/digdag-postgres.git
 $ cd digdag-to-postgres/embulk_to_pg
 $ digdag secrets --local --set pg.password=password
