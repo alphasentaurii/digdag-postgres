@@ -14,7 +14,7 @@ Before you begin, ensure you have met the following requirements:
 * You have installed `Java` version 8
 * You have `postgreSQL` installed and configured
 
-For help installing and configuring Java and PostgreSQL, check out my blog post ![Digdag PostgreSQL Tutorial](https://www.hakkeray.com/datascience/2020/07/26/digdag-postgresql-tutorial.html).
+For help installing and configuring Java and PostgreSQL, check out my blog post ![Digdag PostgreSQL Tutorial](https://www.alphasentaurii.com/programming/2020/07/07/digdag-postgresql-tutorial.html).
 
 ## Running the Digdag Postgres project
 
